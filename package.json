@@ -14,7 +14,7 @@
     "build-storybook": "storybook build",
     "deploy:aws": "sh ./scripts/deploy-production.sh",
     "openapi": "sh ./scripts/openapi.sh",
-    "predeploy": "npm run build:dev",
+    "predeploy": "npm run build:dev && cp dist/index.html dist/404.html",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
