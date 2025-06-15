@@ -1,7 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Footer } from "../organisms/footer";
 import { BreadCrumb } from "../organisms/bread-crumb";
-import { Util } from "@/lib/utils";
+// import { Util } from "@/lib/utils";
 import { useMemo } from "react";
 import { MENUS } from "@/common/constants";
 import Logo from "@/assets/logo.png";
@@ -11,7 +11,9 @@ export const DashLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
   const firstPathName = useMemo(() => {
-    const firstPath = Util.getFirstPathName(location.pathname);
+    // const firstPath = Util.getFirstPathName(location.pathname);
+
+    const firstPath = location.pathname.split("/").filter(Boolean)[1] || null;
     return MENUS.find((item) => item.value === `/${firstPath}`)?.label || "";
   }, [location.pathname]);
 

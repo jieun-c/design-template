@@ -1,4 +1,4 @@
-import { Route } from "@/routes/_dashboard/list";
+import { Route } from "@/routes/list";
 import { Link, useRouter } from "@tanstack/react-router";
 import { useSample } from "@/hooks/use-sample";
 import { useTable } from "@/hooks/use-table";
@@ -86,7 +86,7 @@ export const DashboardListShowcase = () => {
       }
       buttonArea={
         <div>
-          <Link to="/detail">
+          <Link to="/list/detail">
             <Button>등록하기</Button>
           </Link>
         </div>

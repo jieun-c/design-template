@@ -4,7 +4,10 @@ import { Link, useLocation } from "@tanstack/react-router";
 
 export const BreadCrumb = () => {
   const location = useLocation();
-  const breadcrumbs: MenuItem[] = Util.generateBreadcrumbs(location.pathname);
+  // const breadcrumbs: MenuItem[] = Util.generateBreadcrumbs(location.pathname);
+  const breadcrumbs: MenuItem[] = Util.generateBreadcrumbs(
+    `/${location.pathname.split("/").slice(2).join("/")}`,
+  );
 
   return (
     <div className="flex items-center">

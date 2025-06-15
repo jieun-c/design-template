@@ -13,12 +13,15 @@ export const MENUS = [
     label: "목록 템플릿",
     value: "/list",
     roles: [1],
+    children: [
+      {
+        label: "상세 템플릿",
+        value: "/list/detail",
+        roles: [1],
+      },
+    ],
   },
-  {
-    label: "상세 템플릿",
-    value: "/detail",
-    roles: [1],
-  },
+
   {
     label: "퍼블릭 템플릿",
     value: "/public",

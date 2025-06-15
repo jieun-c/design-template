@@ -93,7 +93,7 @@ export const ShowcasePage = () => {
             >
               대시보드 목록 템플릿
             </Link>
-            <Link to="/detail" className="text-primary-80 hover:underline">
+            <Link to="/list/detail" className="text-primary-80 hover:underline">
               대시보드 상세 템플릿
             </Link>
           </div>

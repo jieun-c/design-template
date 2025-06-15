@@ -14,10 +14,9 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ShowcaseImport } from './routes/showcase'
 import { Route as PublicImport } from './routes/public'
 import { Route as DefaultStyleImport } from './routes/default-style'
-import { Route as DashboardImport } from './routes/_dashboard'
 import { Route as IndexImport } from './routes/index'
-import { Route as DashboardListImport } from './routes/_dashboard/list'
-import { Route as DashboardDetailImport } from './routes/_dashboard/detail'
+import { Route as ListIndexImport } from './routes/list/index'
+import { Route as ListDetailImport } from './routes/list/detail'
 
 // Create/Update Routes
 
@@ -39,27 +38,22 @@ const DefaultStyleRoute = DefaultStyleImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardRoute = DashboardImport.update({
-  id: '/_dashboard',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardListRoute = DashboardListImport.update({
-  id: '/list',
-  path: '/list',
-  getParentRoute: () => DashboardRoute,
+const ListIndexRoute = ListIndexImport.update({
+  id: '/list/',
+  path: '/list/',
+  getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardDetailRoute = DashboardDetailImport.update({
-  id: '/detail',
-  path: '/detail',
-  getParentRoute: () => DashboardRoute,
+const ListDetailRoute = ListDetailImport.update({
+  id: '/list/detail',
+  path: '/list/detail',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -71,13 +65,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_dashboard': {
-      id: '/_dashboard'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
     '/default-style': {
@@ -101,115 +88,97 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShowcaseImport
       parentRoute: typeof rootRoute
     }
-    '/_dashboard/detail': {
-      id: '/_dashboard/detail'
-      path: '/detail'
-      fullPath: '/detail'
-      preLoaderRoute: typeof DashboardDetailImport
-      parentRoute: typeof DashboardImport
+    '/list/detail': {
+      id: '/list/detail'
+      path: '/list/detail'
+      fullPath: '/list/detail'
+      preLoaderRoute: typeof ListDetailImport
+      parentRoute: typeof rootRoute
     }
-    '/_dashboard/list': {
-      id: '/_dashboard/list'
+    '/list/': {
+      id: '/list/'
       path: '/list'
       fullPath: '/list'
-      preLoaderRoute: typeof DashboardListImport
-      parentRoute: typeof DashboardImport
+      preLoaderRoute: typeof ListIndexImport
+      parentRoute: typeof rootRoute
     }
   }
 }
 
 // Create and export the route tree
 
-interface DashboardRouteChildren {
-  DashboardDetailRoute: typeof DashboardDetailRoute
-  DashboardListRoute: typeof DashboardListRoute
-}
-
-const DashboardRouteChildren: DashboardRouteChildren = {
-  DashboardDetailRoute: DashboardDetailRoute,
-  DashboardListRoute: DashboardListRoute,
-}
-
-const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
-  DashboardRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '': typeof DashboardRouteWithChildren
   '/default-style': typeof DefaultStyleRoute
   '/public': typeof PublicRoute
   '/showcase': typeof ShowcaseRoute
-  '/detail': typeof DashboardDetailRoute
-  '/list': typeof DashboardListRoute
+  '/list/detail': typeof ListDetailRoute
+  '/list': typeof ListIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '': typeof DashboardRouteWithChildren
   '/default-style': typeof DefaultStyleRoute
   '/public': typeof PublicRoute
   '/showcase': typeof ShowcaseRoute
-  '/detail': typeof DashboardDetailRoute
-  '/list': typeof DashboardListRoute
+  '/list/detail': typeof ListDetailRoute
+  '/list': typeof ListIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/_dashboard': typeof DashboardRouteWithChildren
   '/default-style': typeof DefaultStyleRoute
   '/public': typeof PublicRoute
   '/showcase': typeof ShowcaseRoute
-  '/_dashboard/detail': typeof DashboardDetailRoute
-  '/_dashboard/list': typeof DashboardListRoute
+  '/list/detail': typeof ListDetailRoute
+  '/list/': typeof ListIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | ''
     | '/default-style'
     | '/public'
     | '/showcase'
-    | '/detail'
+    | '/list/detail'
     | '/list'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | ''
     | '/default-style'
     | '/public'
     | '/showcase'
-    | '/detail'
+    | '/list/detail'
     | '/list'
   id:
     | '__root__'
     | '/'
-    | '/_dashboard'
     | '/default-style'
     | '/public'
     | '/showcase'
-    | '/_dashboard/detail'
-    | '/_dashboard/list'
+    | '/list/detail'
+    | '/list/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardRoute: typeof DashboardRouteWithChildren
   DefaultStyleRoute: typeof DefaultStyleRoute
   PublicRoute: typeof PublicRoute
   ShowcaseRoute: typeof ShowcaseRoute
+  ListDetailRoute: typeof ListDetailRoute
+  ListIndexRoute: typeof ListIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardRoute: DashboardRouteWithChildren,
   DefaultStyleRoute: DefaultStyleRoute,
   PublicRoute: PublicRoute,
   ShowcaseRoute: ShowcaseRoute,
+  ListDetailRoute: ListDetailRoute,
+  ListIndexRoute: ListIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -223,21 +192,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_dashboard",
         "/default-style",
         "/public",
-        "/showcase"
+        "/showcase",
+        "/list/detail",
+        "/list/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/_dashboard": {
-      "filePath": "_dashboard.tsx",
-      "children": [
-        "/_dashboard/detail",
-        "/_dashboard/list"
-      ]
     },
     "/default-style": {
       "filePath": "default-style.tsx"
@@ -248,13 +211,11 @@ export const routeTree = rootRoute
     "/showcase": {
       "filePath": "showcase.tsx"
     },
-    "/_dashboard/detail": {
-      "filePath": "_dashboard/detail.tsx",
-      "parent": "/_dashboard"
+    "/list/detail": {
+      "filePath": "list/detail.tsx"
     },
-    "/_dashboard/list": {
-      "filePath": "_dashboard/list.tsx",
-      "parent": "/_dashboard"
+    "/list/": {
+      "filePath": "list/index.tsx"
     }
   }
 }

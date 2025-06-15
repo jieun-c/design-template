@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DashboardListShowcase } from "@/components/pages/showcase/dashboard-list-showcase";
 import { CommonParamsType as ParamsType } from "@/types";
 import { DEFAULT_PAGINATION } from "@/common/constants";
+import { DashLayout } from "@/components/templates/dashboard-layout";
 
-export const Route = createFileRoute("/_dashboard/list")({
+export const Route = createFileRoute("/list/")({
   validateSearch: (search: ParamsType): ParamsType => {
     return {
       page: Number(search?.page ?? DEFAULT_PAGINATION.PAGE),
@@ -13,5 +14,9 @@ export const Route = createFileRoute("/_dashboard/list")({
       endDate: search?.endDate ?? "",
     };
   },
-  component: DashboardListShowcase,
+  component: () => (
+    <DashLayout>
+      <DashboardListShowcase />
+    </DashLayout>
+  ),
 });
