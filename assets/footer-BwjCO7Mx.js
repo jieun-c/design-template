@@ -1,0 +1,1 @@
+import{j as s}from"./index-BFUEoiE0.js";const e="/assets/logo-BdKxHtHc.png",r=()=>s.jsxs("div",{className:"w-full bg-gray-10 flex justify-center items-center px-6 py-1.5",children:[s.jsx("img",{src:e,alt:"logo",className:"h-6"}),s.jsx("p",{className:"text-center text-gray-50 text-xs",children:"Copyright 2025. jieun-c All rights reserved."})]});export{r as F,e as L};
