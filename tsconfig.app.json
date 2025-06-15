@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    "baseUrl": "./src" /* src를 기준으로 import 경로 설정 */,
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    /* Bundler mode */
+    "moduleResolution": "bundler" /* Vite와 같은 번들러에서 모듈을 해석하는 방식 적용 */,
+    "allowImportingTsExtensions": true /* .ts 확장자를 가진 파일을 직접 import 가능 */,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx" /*  React 17+ JSX 변환 방식 사용 */,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true /* 사용되지 않은 로컬이 있을 경우, 오류로 보고 */,
+    "noUnusedParameters": true /* 사용되지 않은 매개변수가 있을 경우, 오류로 보고 */,
+    "noFallthroughCasesInSwitch": true /* switch 문 오류 유형에 대한 오류 보고 */,
+    "noUncheckedSideEffectImports": true /* 부작용이 있는 import가 감지되지 않을 경우 오류 발생 */,
+    "noImplicitAny": true /* 명시적이지 않은 'any' 유형으로 표현식 및 선언 사용 시 오류 발생 */
+  },
+  "include": ["src"]
+}
